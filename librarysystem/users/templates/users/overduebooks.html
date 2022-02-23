@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/homepage.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" /> 
+{% endblock css %}
+{% block content %}
+
+<div id="test-body-mobile">
+    
+  <div class="flash-messages">
+    {% include 'messages.html' %}
+  </div>
+  
+  {% include 'users/navbar.html' %}
+  <header>
+    <div>
+      <div class="small sansserif grey account-settings-menu">
+        <a href="">{{user.email}}</a> &raquo; Overdue Books
+      </div>
+      <div>
+        <h1 class="details-title">
+          Overdue Books
+        </h1>
+      </div>
+
+      <p>
+      </p>
+    </div>
+  </header>
+  
+  <div class="details-content">
+
+    <h2>Overdue Books</h2>
+    <div class="row">
+    <div class="table-responsive text-center col-md-12">
+    <form action="" method="post" id="paymentForm" name="paymentForm">
+      {% csrf_token %}
+      <table class="table table-striped table-lg">
+        <thead>
+          <tr>
+            <th scope="col">ISBN</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Due By:</th>
+            <th scope="col">Late Fees:</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in all_overdue %}
+          <tr>
+            <td> {{ i.book_isbn.book_isbn }} </td>
+            <td>{{ i.book_isbn.book_title}} </td>
+            <td>{{ i.book_isbn.book_author}} </td>
+            <td>{{ i.borrowed_to_date }} </td>
+            <td> N100 x {{days_late }}&nbsp;day(s) = N{{ late_fees }}</td>
+            <td><button type="button" class="btn btn-sm btn-success" onclick="payWithPaystack()">Pay Late Fees</button></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </form>
+    </div>
+    </div>
+  
+  </div>
+  </div>
+</div>
+
+{% block jquery %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/*$(document).ready(function(){
+  //ajax still under construction
+  $.ajax({
+      type:"GET",
+      //url: "url 'users:pay_fees' (rmbr to add template tag), 
+      dataType: "text",
+      async: True,
+      data: { csrfmiddlewaretoken: '{{ csrf_token }}'},
+      success: function(json){
+          var email = json.email;
+          var amount = json.amount;
+          var ref = json.ref;
+
+      }
+  });
+});*/
+</script>    
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script type="text/javascript">
+var paymentForm = document.getElementById('paymentForm');
+paymentForm.addEventListener('submit', payWithPaystack, false);
+function payWithPaystack() {
+ var handler = PaystackPop.setup({
+ key: 'pk_test_21681eb024e8e6e7fcf3ebe0744f0f222a354a37',
+ email: '{{ request.user.email }}',
+ amount: '{{ amtkobo }}', 
+ currency: 'NGN', 
+ ref: '{{ request.user.payment_id }}',
+   callback: function(response) {
+    //this happens after the payment is completed successfully
+     var reference = response.reference;
+    alert('Payment complete! Reference: ' + reference);
+    document.location.href = "";
+    console.log(response);
+    // Make an AJAX call to your server with the reference to verify the transaction or redirect them to where the trx will be updated in your db
+    //ajax call still under construction.
+  },
+  onClose: function() {
+            alert('Transaction was not completed, window closed.');
+   },
+  });
+ handler.openIframe();
+}
+</script>
+
+{% endblock jquery %}
+  {% endblock content %}

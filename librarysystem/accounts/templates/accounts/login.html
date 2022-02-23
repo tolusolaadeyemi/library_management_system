@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> {% endblock css %}
+{% block content %}
+
+<div id="test-body-mobile">
+    
+    <div class="flash-messages">
+      {% include 'messages.html' %}
+    </div>
+    
+    
+    
+
+<div id="contentHead">
+    <h1>Log In</h1>
+</div>
+
+<div id="contentBody">
+  <p>Please enter your <a href="{% url 'frontend:index' %}">Public Library</a> email and password to access your Library account.</p>
+
+  <form id="login" class="login olform" name="login" method="POST">
+    {% csrf_token %}
+    {{ login_form|crispy }}
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+  <p class="text-center">Don't have an account? <a href="{% url 'accounts:signup' %}">Create an account</a>.</p>
+
+</div>
+</div>
+
+
+{% endblock content %}

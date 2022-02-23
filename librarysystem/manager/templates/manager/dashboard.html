@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" /> 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+{% endblock css %}
+
+
+
+{% block content %}
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .navbar-brand{background-color:#484C6B;}
+    </style>
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+</style>
+
+</head>
+<body>
+
+<header class="navbar navbar-dark sticky-top page-banner-black flex-md-nowrap p-0 shadow">
+<a class="page-banner-black col-md-3 col-lg-2 me-0 px-3" href="#">Public Library</a>
+<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<form method="get">
+  {{ myFilter.form }}
+
+<button class="btn btn-primary" type="submit">Search</button>
+</form>
+</header>
+
+<div class="container-fluid">
+<div class="row">
+
+  {% include 'manager/navbar.html' %}
+
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"> Admin Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group me-2">
+        <a href="{% url 'manager:add_book' %}" class="btn btn-sm btn-outline-primary" id="btn1">Add Book</a>
+      </div>
+    </div>
+  </div>
+  <div class="row message">
+    <div class="col-sm-12 text-center">
+        {% include 'messages.html' %}
+    </div></div>
+
+  <h2>Book List</h2>
+  <div class="row">
+  <div class="table-responsive text-center col-md-10">
+  <form action="#" method="post" id="deleteBookForm">
+    {% csrf_token %}
+    <table class="table table-striped table-lg" id="allBooks">
+      <thead>
+        <tr>
+          <th scope="col">ISBN</th>
+          <th scope="col">Image</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Update</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in all_books %}
+        <tr>
+          <td> {{ i.book_isbn }} </td>
+          <td><img src="{{ i.book_image }}" height="100" width="80"> </td>
+          <td>{{ i.book_title}} </td>
+          <td>{{ i.book_author}} </td>
+          <td><a class="btn btn-sm btn-info" href="{% url 'manager:update_book' i.book_isbn %}">Update</a></td>
+          <td><a class="btn btn-sm btn-danger" href="{% url 'manager:delete_book' i.book_isbn %}"> Delete </a></td>
+        </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    </form>
+  </div>
+  </div>
+
+</main>
+</div>
+</div>
+
+
+{% block jquery %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#allBooks').DataTable({
+    "orderCellsTop": true,
+    retrieve: true,
+    "pagingType": "full_numbers",
+  });
+});
+</script>    
+{% endblock jquery %}
+
+{% endblock content%}

@@ -1,0 +1,25 @@
+<div class="mybooks">
+    <div class="mybooks-menu">
+      <ul class="sidebar-section">
+        <li class="section-header">Loans</li>
+        <li>
+          <a href="{% url 'users:homepage' %}" class=selected>
+            Checked out
+          </a>
+        </li>
+        <li>
+          <li><a href="{% url 'users:pending_requests' %}" ><span class="li-count">{{ myRequestsct }}</span>Pending Requests</a></li>
+        </li>
+        <li>
+          <a class="external-link" href="">Loan History</a>
+        </li>
+      </ul>
+      <ul class="sidebar-section">
+        <li class="section-header">Reading Log</li>
+        <li><a href="{% url 'users:homepage' %}" ><span class="li-count">{{ appRequests }}</span>Currently Reading</a></li>
+      <hr>
+      <li><a href="{% url 'users:overdue_books' %}">Overdue Books</a></li>
+      </ul>
+    </div>
+    <div class="mybooks-details">
+      

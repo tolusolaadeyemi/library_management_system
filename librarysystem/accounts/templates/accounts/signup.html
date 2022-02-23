@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block css %}<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> {% endblock css %}
+
+{% block content %}
+<div id="test-body-mobile">
+    
+    <div class="flash-messages">
+        {% include 'messages.html' %}
+    </div>
+    
+<div id="contentHead">
+    <h1>Sign Up</h1>
+    <p class="instruct">Complete the form below to create a new Public Library account.
+    <span class="attn remind">Each field is required</span></p>
+</div>
+
+
+<div id="contentBody">
+    <form class="olform create validate" name="signup" method="POST">
+        {% csrf_token %}
+        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+         {{ form|crispy }}
+        {% endwith %} 
+
+       
+    
+        <br/>
+    
+        <div class="formElement bottom">
+            <br/>
+            <button type="submit" name="signup" id="signup" class="larger">Sign Up</button>
+            <a href="javascript:history.go(-1);" class="smaller attn">Cancel</a>
+        </div>
+    </form>
+    
+    </div>
+    </div>
+ 
+        
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" /> 
+{% endblock css %}
+{% block content %}
+
+
+{% for i in myBooks %}
+<div class="container">                 
+<div class="row">
+<div class="col-md-6">
+  <h1>Title: {{ i.book_isbn.book_title }}</h1>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+  <p><strong>Author:</strong> <a href="">{{ i.book_isbn.book_author }}</a></p> 
+  <p><strong>Genre:</strong> {{ i.book_isbn.book_genre_id }}</p>
+  <h2><strong>Borrowed Date:</strong> {{ i.borrowed_from_date }}</h2>
+  <h2><strong>Return Date:</strong> {{ i.borrowed_to_date }}</h2>
+  </div>
+  <div class="col-md-6">
+  <img src="{{ i.book_isbn.book_image }}">
+  </div>
+  </div>
+
+ {% endfor %} 
+</div>
+
+
+
+{% block jquery %}
+
+    
+  {% endblock jquery %}
+  {% endblock content %}

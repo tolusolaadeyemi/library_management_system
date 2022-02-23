@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" /> 
+{% endblock css %}
+
+
+
+{% block content%}
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .navbar-brand{background-color:#484C6B;}
+    </style>
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  #stop{position:relative;bottom:10px}
+  #route{position:relative;bottom:5px}
+  #route1{position:relative;bottom:10px}
+  #route2{position:relative;bottom:5px}
+</style>
+
+</head>
+<body>
+
+<header class="navbar navbar-dark sticky-top page-banner-black flex-md-nowrap p-0 shadow">
+<a class="page-banner-black col-md-3 col-lg-2 me-0 px-3" href="#">Public Library</a>
+<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<form method="get">
+  {{ myFilter.form }}
+
+<button class="btn btn-primary" type="submit">Search</button>
+</form>
+</header>
+
+<div class="container-fluid">
+<div class="row">
+    {% include 'manager/navbar.html' %}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"> Admin Dashboard</h1>
+  </div>
+  <div class="row message">
+    <div class="col-sm-12 text-center">
+        {% include 'messages.html' %}
+    </div></div>
+
+  <h2>Books On Loan</h2>
+  <div class="row">
+  <div class="table-responsive text-center col-md-10">
+  <form action="#" method="post" id="deleteBookForm">
+    {% csrf_token %}
+    <table class="table table-striped table-lg">
+      <thead>
+        <tr>
+          <th scope="col">ISBN</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Borrowed By:</th>
+          <th scope="col">Due By:</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in all_loans %}
+        <tr>
+          <td> {{ i.book_isbn.book_isbn }} </td>
+          <td>{{ i.book_isbn.book_title}} </td>
+          <td>{{ i.book_isbn.book_author}} </td>
+          <td>{{ i.user_id.email }} </td>
+          <td>{{ i.borrowed_to_date }} </td>
+          <td><a class="btn btn-sm btn-info" href="{% url 'manager:return_book' i.pk %}">Return</a></td>
+        </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    </form>
+  </div>
+  </div>
+
+</main>
+</div>
+</div>
+
+{% block jquery %}
+
+    
+  {% endblock jquery %}
+
+{% endblock content%}

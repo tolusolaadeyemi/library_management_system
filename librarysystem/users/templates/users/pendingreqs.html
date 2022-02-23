@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/homepage.css' %}" rel="stylesheet" type="text/css" /> 
+{% endblock css %}
+{% block content %}
+
+<div id="test-body-mobile">
+    
+  <div class="flash-messages">
+    {% include 'messages.html' %}
+  </div>
+  
+  {% include 'users/navbar.html' %}
+  <header>
+    <div>
+      <div class="small sansserif grey account-settings-menu">
+        <a href="">{{user.email}}</a> &raquo; Pending Requests
+      </div>
+      <div>
+        <h1 class="details-title">
+          Pending Requests
+        </h1>
+      </div>
+
+      <p>
+      </p>
+    </div>
+  </header>
+  
+  <div class="details-content">
+
+{% for i in myRequests %}
+<div class="container">                 
+<div class="row">
+<div class="col-md-6">
+  <h1>Title: {{ i.book_isbn.book_title }}</h1>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+  <p><strong>Author:</strong> <a href="">{{ i.book_isbn.book_author }}</a></p> 
+  <p><strong>Genre:</strong> {{ i.book_isbn.book_genre_id }}</p>
+  <h4> Available Copies: {{ i.book_isbn.book_available_copies }}</h4>
+  <p><strong>Request Status:</strong> {{ i.request_approval_status }}</p>
+  </div>
+  <div class="col-md-6">
+  <img src="{{ i.book_isbn.book_image }}">
+  </div>
+  </div>
+
+ {% endfor %} 
+</div>
+</div>
+</div>
+
+
+{% block jquery %}
+
+    
+  {% endblock jquery %}
+  {% endblock content %}

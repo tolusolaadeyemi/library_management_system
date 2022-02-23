@@ -1,0 +1,525 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+
+{% block content %}
+
+  <div id="test-body-mobile">
+    
+    <div class="flash-messages">
+      {% include 'messages.html' %}
+    </div>
+    
+    
+
+<div id="contentBody">
+
+  
+<div class="carousel-section">
+  <div class="carousel-section-header">
+    <h2 class="home-h2">Welcome to Public Library</h2>
+  </div>
+
+  <div class="carousel-container">
+    <div
+      class="carousel carousel--progressively-enhanced"
+      id="welcome_carousel"
+      data-config="[&quot;#welcome_carousel&quot;, 3, 3, 2, 1, 1]">
+      
+    </div>
+  </div>
+</div>
+
+  
+  
+
+
+  <div class="carousel-section">
+  <div class="carousel-section-header">
+    <h2 class="home-h2"><a name="public_domain" href="/read">Classic Books</a></h2>
+  </div>
+  <div class="carousel-container carousel-container-decorated">
+    <div class="carousel carousel-public_domain carousel--progressively-enhanced"
+      data-config="[&quot;.carousel-public_domain&quot;, 6, 5, 4, 3, 2, 1, {}]">
+      
+{% for i in all_classics %} 
+<div class="book carousel__item">
+  <div class="book-cover">
+    <a href="#">
+      <img class="bookcover" loading="lazy"
+        title="{{ i.book_title }}"
+        alt="{{ i.book_title }}"
+      src="{{ i.book_image }}"/>
+    </a>
+  </div>
+  <div class="book-cta">
+    
+
+<div class="cta-button-group">
+  <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+     data-ol-link-track="CTAClick|Read"
+    >Read</a>
+</div>
+
+
+
+
+  </div>
+</div>
+
+{% endfor %}
+      
+
+
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="#">Action</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_action %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+      </div>
+      </div>
+      </div>
+      
+      
+      
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Mystery</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_mystery %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Fantasy</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_fantasy %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Historical Fiction</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_history %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Horror</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_horror %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+      
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Romance</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_romance %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Sci-Fi</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_scifi %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Biographies/Autobiographies</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_bios %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Cookbooks</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_cookbooks %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">Self-Help</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_selfhelp %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+      <div class="carousel-section">
+        <div class="carousel-section-header">
+          <h2 class="home-h2"><a name="staff_picks" href="">True-Crime</a></h2>
+        </div>
+        <div class="carousel-container carousel-container-decorated">
+          <div class="carousel carousel-staff_picks carousel--progressively-enhanced"
+            data-config="[&quot;.carousel-staff_picks&quot;, 6, 5, 4, 3, 2, 1, {&quot;url&quot;: &quot;/browse.json?q=languageSorter:(\&quot;English\&quot;)&amp;subject=openlibrary_staff_picks&amp;work_id=&amp;_type=&amp;sorts=lending___last_browse desc&quot;, &quot;pageMode&quot;: &quot;page&quot;, &quot;limit&quot;: 18}]">
+            
+      
+            {% for i in all_crime %} 
+            <div class="book carousel__item">
+              <div class="book-cover">
+                <a href="#">
+                  <img class="bookcover" loading="lazy"
+                    title="{{ i.book_title }}"
+                    alt="{{ i.book_title }}"
+                  src="{{ i.book_image }}"/>
+                </a>
+              </div>
+              <div class="book-cta">
+                
+            
+            <div class="cta-button-group">
+              <a href="{% url 'users:book_detail' i.book_isbn %}" title="Read ebook from Internet Archive" class="cta-btn cta-btn--ia cta-btn--available cta-btn--read"
+                 data-ol-link-track="CTAClick|Read"
+                >Read</a>
+            </div>
+            
+            
+            
+            
+              </div>
+            </div>
+            
+            {% endfor %}
+    
+      </div>
+      </div>
+      </div>
+
+    </div>
+    </div> 
+      <div class="clearfix"></div>
+      {% endblock content %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/homepage.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" /> 
+{% endblock css %}
+{% block content %}
+
+<div id="test-body-mobile">
+    
+  <div class="flash-messages">
+    {% include 'messages.html' %}
+  </div>
+  
+  {% include 'users/navbar.html' %}
+  <header>
+    <div>
+      <div class="small sansserif grey account-settings-menu">
+        <a href="">{{user.email}}</a> &raquo; Overdue Books
+      </div>
+      <div>
+        <h1 class="details-title">
+          Payment Confirmation
+        </h1>
+      </div>
+
+      <p>
+      </p>
+    </div>
+  </header>
+  
+  <div class="details-content">
+    <div class="row">
+    <div class="table-responsive text-center col-md-12">
+        <form id="myform" name="paymentForm" action="{% url 'users:payment_confirmation' %}">
+            {% csrf_token %}
+			<table class="table table-striped" style="width:75%;margin:auto">
+                <thead>
+                <tr>
+                <th>Amount </th>
+                <th>Status</th>
+                <th>Reference No.</th>
+                <th>Date </th>
+                </tr>
+            </thead>
+            <tbody>
+				<tr>
+                    <td> {{ data.late_fees}} </td>
+                    <td> {{ data.payment_status }}</td>
+                    <td> {{ data.payment_id }}</td>
+                    <td> {{ data.payment_date }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a  class="btn btn-primary" href="">Confirm</a></td>
+                    </form>
+                </tr>
+            </tbody>
+               
+			</table>
+            {{ data }}
+
+    </div>
+    </div>
+  
+  </div>
+  </div>
+</div>
+
+
+
+{% block jquery %}
+
+    
+{% endblock jquery %}
+
+  {% endblock content %}

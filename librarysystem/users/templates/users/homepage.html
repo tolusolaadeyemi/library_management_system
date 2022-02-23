@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/homepage.css' %}" rel="stylesheet" type="text/css" /> 
+{% endblock css %}
+
+
+{% block content %}
+
+  <div id="test-body-mobile">
+    
+    <div class="flash-messages">
+      {% include 'messages.html' %}
+    </div>
+    
+    {% include 'users/navbar.html' %}
+    <header>
+      <div>
+        <div class="small sansserif grey account-settings-menu">
+          <a href="">{{user.email}}</a> &raquo; Books You&#39;ve Checked Out
+        </div>
+        <div>
+          <h1 class="details-title">
+            Books You&#39;ve Checked Out
+          </h1>
+        </div>
+
+        <p>
+        </p>
+      </div>
+    </header>
+
+    <div class="details-content">
+    
+<style type="text/css">
+.date, .waitrank {
+    margin: 5px 0px;
+}
+.dialog .title {
+    font-weight: bold;
+}
+
+tr.expired {
+    background: #ffcdcd;
+}
+
+td.status, th.status {
+    padding: 15px;
+    text-align: center;
+}
+
+tr.row-available .status-value {
+    color: darkgreen;
+}
+
+tr.row-available {
+    background: #fffdcd;
+}
+
+td.actions form + form {
+    margin-top: 5px;
+}
+
+th.action {
+    width: 150px;
+}
+th.status {
+    width: 150px;
+}
+.loan-history {
+  margin-top: 1em;
+}
+</style>
+
+{% if myBooks %}
+{% for i in myBooks %}
+<div class="container">                 
+<div class="row">
+<div class="col-md-6">
+  <h1>Title: {{ i.book_isbn.book_title }}</h1>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+  <p><strong>Author:</strong> <a href="">{{ i.book_isbn.book_author }}</a></p> 
+  <p><strong>Genre:</strong> {{ i.book_isbn.book_genre_id }}</p>
+  <h2><strong>Borrowed Date:</strong> {{ i.borrowed_from_date }}</h2>
+  <h2><strong>Due Date:</strong> {{ i.borrowed_to_date }}</h2>
+  {% if currenttime > i.borrowed_to_date %}
+  <p style="color:red"> This book is {{ days_late }} day(s) overdue, Kindly follow <a href="{% url 'users:overdue_books' %}">this link</a>&nbsp;to make the payment for late charges in order to prevent account restriction.</p>
+  {% else %}
+  <p></p>
+  {% endif %}
+  </div>
+  <div class="col-md-6">
+  <img src="{{ i.book_isbn.book_image }}">
+  </div>
+  </div>
+
+ {% endfor %} 
+{% else %}
+<div>
+  <div><em>You&#39;ve not checked out any books at this moment.</em></div>
+</div>
+ {% endif %}
+
+
+
+<!--For analytics-->
+<div class="clearfix"></div>
+{% endblock content %}
+

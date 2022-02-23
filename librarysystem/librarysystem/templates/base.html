@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="title" content="Library Management System" />
+    <meta name="keywords" content="free books, books to read, free ebooks, audio books, read books for free, read books online, online library">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="tolusolaadeyemi" />
+    <meta name="theme-color" content="#e2dcc5">
+    {% block css %}
+    <link href="{% static 'css/lms.css' %}" rel="stylesheet" type="text/css" /> 
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" /> 
+    {% endblock css %}
+    <meta name="description" content="Library Management System is an open, editable library catalog, building towards a web page for every book ever published. Read, borrow, and discover more than 3M books for free." />
+    
+    <title>Library Management System</title>
+
+</head>
+
+
+
+
+<body class="" >
+<div id="topNotice">
+  <div class="page-banner page-banner-black page-banner-center">
+    <div class="iaBar">
+      <a href="{% url 'frontend:index' %}"><img alt="LMS logo" src="{% static 'images/logo1.png' %}" width="160" height="50"></a>
+      <a class="ghost-btn" href="#" >Donate<span class="heart" aria-hidden="true">♥</span></a>
+    </div>
+  </div>
+</div>
+
+  
+<header id="header-bar" class="header-bar">
+
+  <div class="row">
+    <div class="col">
+    <ul class="auth-component">
+      {% if user.is_authenticated %} 
+      <li class="hide-me">
+        <a class="btn primary" href="#">Welcome, {{user.first_name}}</a>
+      </li>
+      <li class="hide-me">
+        <a class="btn primary" href="{% url 'users:homepage' %}">{{user.first_name}}'s account </a>
+      </li>
+      <li class="hide-me">
+        <a class="btn" href="{% url 'accounts:logout' %}">Logout</a>
+      </li>
+      {% else %}
+      <li class="hide-me">
+        <a class="btn" href="{% url 'accounts:login' %}">Log In</a></li>
+      <li><a class="btn primary" href="{% url 'accounts:signup' %}">Sign Up</a></li>
+      {% endif %}
+    </ul>
+    </div>
+    </div>
+   
+  {% if not user.is_superuser %} 
+  <div class="row">
+    <div class="col">
+      <div class="card card-body">
+        <form method="get">
+          {{ myFilter.form }}
+       <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+ 
+      </div>
+ 
+    </div>
+    </div>
+    {% else %}
+<div></div>
+{% endif %}
+
+<div class="hamburger-component header-dropdown">
+    <details>
+      <summary data-ol-link-track="HeaderBar|Hamburger">
+        <img class="hamburger__icon" src="./images/hamburger.png" alt="additional options menu"/>
+      </summary>
+      <div class="mask-menu"></div>
+      <div 
+      class="app-drawer"
+      >
+        <ul class="dropdown-menu hamburger-dropdown-menu">
+          <li class="subsection">
+            My Public Library
+          </li>
+          <li class="login-links">
+            <a class="login-links__secondary" href="{% url 'accounts:login' %}">Log In</a>
+            <a class="login-links__primary" href="{% url 'accounts:signup' %}">Sign Up</a>
+          </li>
+          <li class="subsection">
+            Browse
+          </li>
+          <li>
+            <a href="/romance">
+             Romance
+            </a>
+            </li>
+            <li>
+            <a href="/action">
+              Action
+            </a>
+            </li>
+            <li>
+            <a href="/classics">
+              Classics
+            </a>
+            </li>
+        </ul>
+      </div>
+    </details>
+</div>
+</header>
+<header class="header-bar mobile">
+  <ul class="navigation-component mobile">
+    <li>
+
+<div class="browse-component header-dropdown">
+    <details>
+      <summary >
+        Browse Genres
+        <span class="shift">Menu</span>
+      </summary>
+      <div 
+      class="browse-dropdown-component navigation-dropdown-component"
+      >
+        <ul class="dropdown-menu browse-dropdown-menu">
+          <li>
+            <a href="/romance">
+             Romance
+            </a>
+            </li>
+            <li>
+            <a href="/action">
+              Action
+            </a>
+            </li>
+            <li>
+            <a href="/classics">
+              Classics
+            </a>
+            </li>
+            <li>
+            <a href="/african">
+              African Literature
+            </a>
+            </li>
+            <li>
+            <a href="/yalit">
+              Young Adult Literature
+            </a>
+            </li>
+        </ul>
+      </div>
+    </details>
+</div>
+</li>
+    <li>
+</li>
+  </ul>
+</header>
+    {% block content %}
+
+    {% endblock content %}
+   
+   
+      <footer>
+        <div id="footer-content" >
+          <div id="footer-links">
+            <div>
+              <h2>Open Library</h2>
+              <ul>
+                <li><a href="/about/vision">Vision</a></li>
+                <li><a href="/volunteer">Volunteer</a></li>
+                <li><a href="/partner-with-us">Partner With Us</a></li>
+                <li><a href="https://archive.org/about/jobs.php" title="Jobs">Careers</a></li>
+                <li><a href="https://blog.openlibrary.org/">Blog</a></li>
+                <li><a href="https://archive.org/about/terms.php">Terms of Service</a></li>
+                <li><a href="https://archive.org/donate/?platform=ol&origin=olwww-TopNavDonateButton">Donate</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Discover</h2>
+              <ul>
+                <li><a href="/" title="Go home">Home</a></li>
+                <li><a href="/search" title="Explore Books">Books</a></li>
+                <li><a href="/search/authors" title="Explore authors">Authors</a></li>
+                <li><a href="/subjects" title="Explore subjects">Subjects</a></li>
+                <li><a href="/collections" title="Explore collections">Collections</a></li>
+                <li><a href="/advancedsearch">Advanced Search</a></li>
+                <li><a href="#top" title="Navigate to top of this page">Return to Top</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Develop</h2>
+              <ul>
+                <li><a href="/developers" title="Explore Open Library Developer Center">Developer Center</a></li>
+                <li><a href="/developers/api" title="Explore Open Library APIs">API Documentation</a></li>
+                <li><a href="/developers/dumps" title="Bulk Open Library data">Bulk Data Dumps</a></li>
+                <li><a href="https://github.com/internetarchive/openlibrary/wiki/Writing-Bots" title="Write a bot">Writing Bots</a></li>
+                <li><a href="/books/add" title="Add a new book to Open Library">Add a Book</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Help</h2>
+              <ul>
+                <li><a href="/help">Help Center</a></li>
+                <li><a href="/contact?path=/" title="Problems">Report A Problem</a></li>
+                <li><a href="/help/faq/editing" title="Suggest Edits">Suggesting Edits</a></li>
+              </ul>
+            </div>
+            <div id="footer-locale-menu">
+              <h2>Change Website Language</h2> 
+              <ul id="locale-options">
+                <li><a href="#" lang="cs" data-lang-id="cs" title="Czech">Čeština (cs)</a> </li>
+                <li><a href="#" lang="de" data-lang-id="de" title="German">Deutsch (de)</a> </li>
+                <li><a href="#" lang="en" data-lang-id="en" title="English">English (en)</a></li>
+                <li><a href="#" lang="es" data-lang-id="es" title="Spanish">Español (es)</a></li>
+                <li><a href="#" lang="fr" data-lang-id="fr" title="French">Français (fr)</a></li>
+                <li><a href="#" lang="hr" data-lang-id="hr" title="Croatian">Hrvatski (hr)</a></li>
+                <li><a href="#" lang="te" data-lang-id="te" title="Telugu">తెలుగు (te)</a></li>
+              </ul>
+            </div>
+          </div>
+          <hr>
+          <div id="footer-details">
+            <div id="legal-details" >
+              <span>Public Library 2021 </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {% block jquery %}
+      <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/bootstrap.bundle.js' %}"></script>
+
+      {% endblock jquery%}
+    </body>
+      </html>

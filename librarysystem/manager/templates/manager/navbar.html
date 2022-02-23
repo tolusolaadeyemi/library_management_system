@@ -1,0 +1,33 @@
+
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'manager:index' %}">
+            <span data-feather="home"></span>
+            Manage Books
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'manager:add_book' %}" id="stoplink">
+            Add Books
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'manager:book_requests' %}" class="nav-link">Pending Requests &nbsp; <span class="li-count">({{ myRequests }})</span></a>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link" href="{% url 'manager:loan_list' %}">
+            Books on Loan
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'manager:user_list' %}"id="routelink">
+           Manage Users
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+

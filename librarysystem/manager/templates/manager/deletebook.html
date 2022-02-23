@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+<link href="{% static 'css/lmsreg.css' %}" rel="stylesheet" type="text/css" /> 
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" /> 
+{% endblock css %}
+
+
+
+{% block content%}
+<div id="test-body-mobile">
+    
+    <div class="flash-messages">
+      {% include 'messages.html' %}
+    </div>
+    <br>
+    <br>
+  <h2> Are you sure you want to delete {{ book.book_title }} ?</h2>
+
+<div class="container">
+    <div class="col-md-8">
+    <form action="{% url 'manager:delete_book' book.book_isbn %}" method="post" id="deleteBookForm">
+    {% csrf_token %}
+    <a class="btn btn-danger" href="{% url 'manager:index' %}"> Cancel </a>
+    <button type="submit" class="btn btn-success" name="confirm">Confirm</button>
+    </form>
+    </div>
+    
+  </div>
+
+
+  
+
+{% endblock content%}
+ 
+{% block jquery %}
+
+    
+{% endblock jquery %}
